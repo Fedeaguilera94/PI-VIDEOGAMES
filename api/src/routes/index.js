@@ -22,6 +22,7 @@ const getGames = async () => {
   let apiGame = [];
   for (let i = 0; i < url.length; i++) {
     for (let j = 0; j < url[i].data.results.length; j++) {
+      // probar .FLAT()
       apiGame.push(url[i].data.results[j]);
     }
   }
@@ -100,7 +101,7 @@ router.get("/videogames", async (req, res) => {
 }); */
 
 router.get("/genres", async (req, res) => {
-  const genresDb = await Genre.findAll();
+  const genresDb = await Genre.findAll(); // compruebo si hay
   if (genresDb.length) return res.send("Genres in DB");
 
   const response = await axios.get(
@@ -109,12 +110,33 @@ router.get("/genres", async (req, res) => {
   const genres = response.data.results;
   genres.forEach(async (g) => {
     await Genre.findOrCreate({
+      // creo la tabla con name
       where: {
         name: g.name,
       },
     });
   });
   res.json(genres);
+});
+
+router.post("/videogame", async (req, res) => {
+  let { name, description, releaseDate, rating, genres, platforms, created } =
+    req.body;
+  console.log(description);
+  let gameCreated = await Videogame.create({
+    name,
+    description,
+    releaseDate,
+    rating,
+    platforms,
+    created,
+    genres,
+  });
+
+  let genreDB = await Genre.findAll({ where: { name } }); //??? {name}
+  console.log("llegue");
+  gameCreated.addGenre(genreDB);
+  res.send("created videoGame");
 });
 
 module.exports = router;

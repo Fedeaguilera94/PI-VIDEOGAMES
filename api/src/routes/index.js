@@ -9,6 +9,8 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+
+//______________________________________________________________________________
 const getGames = async () => {
   const url = [
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1`), // solo trae 20
@@ -49,6 +51,7 @@ const dataBase = async () => {
       model: Genre,
       attributes: ["name"], // traigo el nombre del genero
       through: {
+        // comprobacion
         atrributes: [],
       },
     },
@@ -66,15 +69,52 @@ router.get("/videogames", async (req, res) => {
   const { name } = req.query;
   let totalGames = await getAllGames();
   if (name) {
-    let searchGame = await totalGames.filter((game) =>
+    let searchGame = totalGames.filter((game) =>
       game.name.toLowerCase().includes(name.toLowerCase())
     );
     searchGame.length
       ? res.status(200).send(searchGame)
-      : res.status(404).send("Juego no encontrado");
+      : res.status(404).send("Game not found");
   } else {
     res.status(200).json(totalGames);
   }
+});
+//_________________________________________________
+
+/* router.get("/genre", async (req, res) => {
+  const genresDb = await Genre.findAll();
+  if (genresDb.length) return res.send("Hay generos en la DB");
+
+  const apiData = await axios.get(
+    `https://api.rawg.io/api/genre?key=${API_KEY}`
+  );
+  const genres = apiData.data.results;
+  genres.forEach(async (g) => {
+    await Genre.findOrCreate({
+      where: {
+        name: g.name,
+      },
+    });
+  });
+  res.json(genres);
+}); */
+
+router.get("/genres", async (req, res) => {
+  const genresDb = await Genre.findAll();
+  if (genresDb.length) return res.send("Genres in DB");
+
+  const response = await axios.get(
+    `https://api.rawg.io/api/genres?key=${API_KEY}`
+  );
+  const genres = response.data.results;
+  genres.forEach(async (g) => {
+    await Genre.findOrCreate({
+      where: {
+        name: g.name,
+      },
+    });
+  });
+  res.json(genres);
 });
 
 module.exports = router;

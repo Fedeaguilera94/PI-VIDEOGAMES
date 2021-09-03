@@ -40,9 +40,11 @@ export default function Home() {
           <option value="create">Create in BD</option>
         </select>
         {allVideoGames?.map((g) => {
+          // condicion ???
+
           return (
             <div>
-              <GameCard name={g.name} image={g.image} genre={g.genres} />
+              <GameCard name={g.name} image={g.image} genre={g.Genres} />
             </div>
           );
         })}

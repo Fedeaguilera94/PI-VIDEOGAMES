@@ -101,7 +101,7 @@ router.get("/videogames", async (req, res) => {
 }); */
 
 router.get("/genres", async (req, res) => {
-  const genresDb = await Genre.findAll(); // compruebo si hay
+  const genresDb = await Genre.findAll(); // compruebo si hay evito crear 2 veces
   if (genresDb.length) return res.send("Genres in DB");
 
   const response = await axios.get(
@@ -119,10 +119,12 @@ router.get("/genres", async (req, res) => {
   res.json(genres);
 });
 
+//await Genre.bulkCreate(response) cambiar por forEACH
+
 router.post("/videogame", async (req, res) => {
   let { name, description, releaseDate, rating, genres, platforms, created } =
     req.body;
-  console.log(description);
+
   let gameCreated = await Videogame.create({
     name,
     description,
@@ -132,11 +134,28 @@ router.post("/videogame", async (req, res) => {
     created,
     genres,
   });
+  genres.forEach(async (g) => {
+    let game = await Genre.findAll({
+      where: {
+        name: g,
+      },
+    });
+    await gameCreated.addGenre(game);
+  });
 
-  let genreDB = await Genre.findAll({ where: { name } }); //??? {name}
-  console.log("llegue");
-  gameCreated.addGenre(genreDB);
   res.send("created videoGame");
 });
 
+//____________________________________________________
+router.get("/videogame/:id", async (req, res) => {
+  const { id } = req.params;
+  const gamesTotal = await getAllGames();
+  if (id) {
+    let gameId = gamesTotal.filter((game) => game.id == id);
+    gameId.length
+      ? res.status(200).json(gameId)
+      : res.status(404).send("Game not found");
+  }
+});
+//____________________________________________________
 module.exports = router;

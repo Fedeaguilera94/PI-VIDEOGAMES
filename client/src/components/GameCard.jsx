@@ -6,7 +6,7 @@ export default function Card({ name, image, genre }) {
   return (
     <div>
       <h1>{name}</h1>
-      <img src={image} alt="img not found" />
+      <img src={image} alt="img not found" width="300px" height="170px" />
       <p>Generos : {prueba.join("-")}</p>
     </div>
   );

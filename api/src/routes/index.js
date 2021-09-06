@@ -12,20 +12,43 @@ const router = Router();
 
 //______________________________________________________________________________
 const getGames = async () => {
-  const url = [
+  /*   const url = [
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1`), // solo trae 20
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2`),
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=3`),
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=4`),
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=5`),
-  ];
+  ]; */
+  const url1 = await axios.get(
+    `https://api.rawg.io/api/games?key=${API_KEY}&page=1`
+  );
+  const url2 = await axios.get(
+    `https://api.rawg.io/api/games?key=${API_KEY}&page=2`
+  );
+  const url3 = await axios.get(
+    `https://api.rawg.io/api/games?key=${API_KEY}&page=3`
+  );
+  const url4 = await axios.get(
+    `https://api.rawg.io/api/games?key=${API_KEY}&page=4`
+  );
+  const url5 = await axios.get(
+    `https://api.rawg.io/api/games?key=${API_KEY}&page=5`
+  );
+
   let apiGame = [];
-  for (let i = 0; i < url.length; i++) {
+  apiGame = url1.data.results.concat(
+    url2.data.results,
+    url3.data.results,
+    url4.data.results,
+    url5.data.results
+  );
+
+  /*   for (let i = 0; i < url.length; i++) {
     for (let j = 0; j < url[i].data.results.length; j++) {
       // probar .FLAT()
       apiGame.push(url[i].data.results[j]);
     }
-  }
+  } */
 
   apiGame = apiGame.map((game) => {
     let genre = game.genres.map((g) => {

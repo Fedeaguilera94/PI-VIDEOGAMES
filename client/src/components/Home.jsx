@@ -1,7 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideoGames, orderByName, orderByRating } from "../actions";
+import {
+  filterCreatedDB,
+  getVideoGames,
+  orderByName,
+  orderByRating,
+} from "../actions";
 import { Link } from "react-router-dom";
 import GameCard from "./GameCard";
 import Paginado from "./Paginado";
@@ -18,7 +23,7 @@ export default function Home() {
   const indexFirstGame = indexLastGame - gamesPerPage; //0 indice primer personaje
   const currentGames = allVideoGames.slice(indexFirstGame, indexLastGame); // cual rendenriza depende de la pag!
   // new set no permite copias
-  const genres = [
+  /*   const genres = [
     ...new Set(
       allVideoGames.reduce(
         (acc, curr) => [
@@ -28,7 +33,7 @@ export default function Home() {
         []
       )
     ),
-  ].sort((a, b) => (a > b ? 1 : -1));
+  ].sort((a, b) => (a > b ? 1 : -1)); */
 
   // probar FLAT
 
@@ -59,6 +64,11 @@ export default function Home() {
     setOrden(`Ordenado ${e.target.value}`); //!!!!!!!!!!!!!!! usar otro estado
   }
 
+  function handleFilterCreated(e) {
+    e.preventDefault();
+    dispatch(filterCreatedDB(e.target.value));
+  }
+
   return (
     <div>
       <Link to="/videogame">Created Video Game</Link>
@@ -72,22 +82,33 @@ export default function Home() {
       </button>
       <div>
         <select onChange={(e) => handleSort(e)}>
-          <option>--ORDER--</option>
-          <option value="asc">ASC</option>
-          <option value="desc">DESC</option>
+          <option selected="true" disabled="disabled" value="">
+            --ORDER--
+          </option>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
         </select>
 
         <select onChange={(e) => handleScore(e)}>
+          <option selected="true" disabled="disabled" value="">
+            --RATING--
+          </option>
           <option value="top">RATING TOP</option>
           <option value="low">RATING LOW</option>
         </select>
 
-        <select>
+        <select onChange={(e) => handleFilterCreated(e)}>
+          <option value="all">All</option>
+          <option value="created">Created</option>
+          <option value="api">Existent</option>
+        </select>
+
+        {/*  <select>
           <option>All</option>
           {genres.map((g) => (
             <option key={g}> {g} </option>
           ))}
-        </select>
+        </select> */}
         <Paginado
           gamesTotal={gamesPerPage}
           allVideoGames={allVideoGames.length}
@@ -98,13 +119,15 @@ export default function Home() {
 
           return (
             <div>
-              <GameCard
-                name={g.name}
-                image={g.image}
-                genre={g.Genres}
-                key={g.id}
-                rating={g.rating}
-              />
+              <Link to={"/home/" + g.id}>
+                <GameCard
+                  name={g.name}
+                  image={g.image}
+                  genres={g.genres}
+                  key={g.id}
+                  rating={g.rating}
+                />
+              </Link>
             </div>
           );
         })}

@@ -1,17 +1,22 @@
 const initialState = {
   videoGames: [],
-  allGames: [],
+  allVideoGames: [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case "GET_CHARACTERS":
+    case "GET_CHARACTERS": //!!!!! CAMBIAR FFFF
       return {
         ...state,
         videoGames: action.payload,
-        allGames: action.payload,
+        allVideoGames: action.payload,
       };
     //_____________________________________________
+    case "GET_NAME_VIDEOGAME":
+      return {
+        ...state,
+        videoGames: action.payload,
+      };
     case "ORDER_BY_NAME":
       let sortArray =
         action.payload === "asc"
@@ -67,15 +72,16 @@ function rootReducer(state = initialState, action) {
     //___________________________________________
     case "FILTER_BY_GENRE":
       return {};
+
     case "FILTER_CREATED":
-      const allGames = state.allGames;
       const createdFilter =
         action.payload === "created"
-          ? allGames.filter((g) => g.created)
-          : allGames.filter((g) => !g.created);
+          ? state.allVideoGames.filter((g) => g.created)
+          : state.allVideoGames.filter((g) => !g.created);
       return {
         ...state,
-        videoGames: action.payload,
+        videoGames:
+          action.payload === "all" ? state.allVideoGames : createdFilter,
       };
 
     default:

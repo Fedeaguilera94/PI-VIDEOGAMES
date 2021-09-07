@@ -10,6 +10,22 @@ export function getVideoGames() {
   };
 }
 
+export function getNameVideoGame(payload) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(
+        "http://localhost:3001/videogames?name=" + payload
+      );
+      return dispatch({
+        type: "GET_NAME_VIDEOGAME",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function filterCreatedDB(payload) {
   return {
     type: "FILTER_CREATED",

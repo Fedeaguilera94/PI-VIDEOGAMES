@@ -12,14 +12,6 @@ const router = Router();
 
 //______________________________________________________________________________
 const getGames = async () => {
-  /*   const url = [
-    await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1`), // solo trae 20
-    await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2`),
-    await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=3`),
-    await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=4`),
-    await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=5`),
-  ]; */
-
   // VER TRY CATCH!!!!!!!!!!!!!!!
   const url1 = await axios.get(
     `https://api.rawg.io/api/games?key=${API_KEY}&page=1`
@@ -53,24 +45,18 @@ const getGames = async () => {
   } */
 
   apiGame = apiGame.map((game) => {
-    let genre = game.genres.map((g) => {
-      return {
-        slug: g.slug,
-        name: g.name,
-      };
-    });
     return {
       id: game.id,
       name: game.name,
       image: game.background_image,
-      Genres: genre,
+      genres: game.genres,
+
       rating: game.rating,
       released: game.released,
     };
   });
   return apiGame;
 };
-
 const dataBase = async () => {
   return await Videogame.findAll({
     include: {

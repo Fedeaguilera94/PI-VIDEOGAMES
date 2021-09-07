@@ -19,6 +19,8 @@ const getGames = async () => {
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=4`),
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=5`),
   ]; */
+
+  // VER TRY CATCH!!!!!!!!!!!!!!!
   const url1 = await axios.get(
     `https://api.rawg.io/api/games?key=${API_KEY}&page=1`
   );

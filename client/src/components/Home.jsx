@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideoGames } from "../actions";
+import { getVideoGames, orderByName, orderByRating } from "../actions";
 import { Link } from "react-router-dom";
 import GameCard from "./GameCard";
 import Paginado from "./Paginado";
@@ -9,12 +9,28 @@ import Paginado from "./Paginado";
 export default function Home() {
   const dispatch = useDispatch(); //hook
   const allVideoGames = useSelector((state) => state.videoGames); //mapstatetoprops =
+
   //_____________estados locales
   const [currentPages, setCurrentPages] = useState(1); //pagina actual 1
   const [gamesPerPage, setgamesPerPage] = useState(15); // total por pagina siempre 15
+  const [orden, setOrden] = useState("");
   const indexLastGame = currentPages * gamesPerPage; // pagina * personajeporPagina // 15
   const indexFirstGame = indexLastGame - gamesPerPage; //0 indice primer personaje
   const currentGames = allVideoGames.slice(indexFirstGame, indexLastGame); // cual rendenriza depende de la pag!
+  // new set no permite copias
+  const genres = [
+    ...new Set(
+      allVideoGames.reduce(
+        (acc, curr) => [
+          ...acc,
+          ...curr.Genres.reduce((acc, curr) => [...acc, curr.name], []),
+        ],
+        []
+      )
+    ),
+  ].sort((a, b) => (a > b ? 1 : -1));
+
+  // probar FLAT
 
   const paginado = (pageNum) => {
     setCurrentPages(pageNum);
@@ -29,6 +45,20 @@ export default function Home() {
     dispatch(getVideoGames());
   }
 
+  function handleSort(e) {
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+    setCurrentPages(1);
+    setOrden(`Ordenado ${e.target.value}`); //!!!!!!!!!!!!!!! usar otro estado
+  }
+
+  function handleScore(e) {
+    e.preventDefault();
+    dispatch(orderByRating(e.target.value));
+    setCurrentPages(1);
+    setOrden(`Ordenado ${e.target.value}`); //!!!!!!!!!!!!!!! usar otro estado
+  }
+
   return (
     <div>
       <Link to="/videogame">Created Video Game</Link>
@@ -41,14 +71,22 @@ export default function Home() {
         Reload Games
       </button>
       <div>
-        <select>
+        <select onChange={(e) => handleSort(e)}>
+          <option>--ORDER--</option>
           <option value="asc">ASC</option>
           <option value="desc">DESC</option>
-          <option value="rat">RATING</option>
         </select>
+
+        <select onChange={(e) => handleScore(e)}>
+          <option value="top">RATING TOP</option>
+          <option value="low">RATING LOW</option>
+        </select>
+
         <select>
-          <option value="genre">Genre</option>
-          <option value="create">Create in BD</option>
+          <option>All</option>
+          {genres.map((g) => (
+            <option key={g}> {g} </option>
+          ))}
         </select>
         <Paginado
           gamesTotal={gamesPerPage}
@@ -65,6 +103,7 @@ export default function Home() {
                 image={g.image}
                 genre={g.Genres}
                 key={g.id}
+                rating={g.rating}
               />
             </div>
           );

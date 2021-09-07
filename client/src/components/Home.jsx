@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import GameCard from "./GameCard";
 import Paginado from "./Paginado";
-
+import SearchBar from "./SearchBar";
 export default function Home() {
   const dispatch = useDispatch(); //hook
   const allVideoGames = useSelector((state) => state.videoGames); //mapstatetoprops =
@@ -114,6 +114,7 @@ export default function Home() {
           allVideoGames={allVideoGames.length}
           paginado={paginado}
         />
+        <SearchBar />
         {currentGames?.map((g) => {
           // condicion ???
 

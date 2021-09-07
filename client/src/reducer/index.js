@@ -5,7 +5,7 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case "GET_CHARACTERS": //!!!!! CAMBIAR FFFF
+    case "GET_VIDEOGAMES": //!!!!! CAMBIAR
       return {
         ...state,
         videoGames: action.payload,

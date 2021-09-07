@@ -4,17 +4,17 @@ export function getVideoGames() {
   return async function (dispatch) {
     var json = await axios.get("http://localhost:3001/videogames"); //conecto fyb
     return dispatch({
-      type: "GET_CHARACTERS",
+      type: "GET_VIDEOGAMES",
       payload: json.data, // default asc
     });
   };
 }
 
-export function getNameVideoGame(payload) {
+export function getNameVideoGame(name) {
   return async function (dispatch) {
     try {
       var json = await axios.get(
-        "http://localhost:3001/videogames?name=" + payload
+        "http://localhost:3001/videogames?name=" + name
       );
       return dispatch({
         type: "GET_NAME_VIDEOGAME",

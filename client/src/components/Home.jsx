@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterCreatedDB,
+  getNameVideoGame,
   getVideoGames,
   orderByName,
   orderByRating,
@@ -115,8 +116,9 @@ export default function Home() {
 
           return (
             <div>
-              <Link to={"/home/" + g.id}>
+              <Link to={"/videogame/" + g.id}>
                 <GameCard
+                  id={g.id}
                   name={g.name}
                   image={g.image}
                   genres={g.genres}

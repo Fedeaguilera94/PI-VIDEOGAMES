@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Card({ name, image, genres, rating }) {
+export default function Card({ name, image, genres, id, rating }) {
   let genero = genres.map((e) => e.name);
 
   return (

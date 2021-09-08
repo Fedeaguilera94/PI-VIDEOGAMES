@@ -7,7 +7,7 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case "GET_VIDEOGAMES": //!!!!! CAMBIAR
+    case "GET_VIDEOGAMES":
       return {
         ...state,
         videoGames: action.payload,
@@ -94,13 +94,15 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-    case "GET_DATEAIL":
+    case "GET_DETAIL":
+      //console.log("info DETAIL", action.payload);
       return {
         ...state,
         detail: action.payload,
       };
 
     default:
+      //console.log("DEFAULT CASE", action.type);
       return state;
   }
 }

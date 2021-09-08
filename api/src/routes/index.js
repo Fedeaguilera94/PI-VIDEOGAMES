@@ -171,12 +171,21 @@ let genDb = await Genre.findAll({
 //____________________________________________________
 router.get("/videogames/:id", async (req, res) => {
   const { id } = req.params;
-  const gamesTotal = await getAllGames();
-  if (id) {
-    let gameId = await gamesTotal.filter((game) => game.id == id);
-    gameId.length
-      ? res.status(200).json(gameId)
-      : res.status(404).send("Game not found");
+  try {
+    if (id.includes("-")) {
+      const gameDB = await Videogame.findOne({
+        where: { id },
+        include: [Genre],
+      });
+      return res.json(gameDB);
+    }
+
+    const gameAPI = await axios.get(
+      `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
+    );
+    res.json(gameAPI.data);
+  } catch (err) {
+    res.status(404).json({ error: "Id not found" });
   }
 });
 //____________________________________________________

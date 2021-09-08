@@ -2,6 +2,7 @@ const initialState = {
   videoGames: [],
   allVideoGames: [],
   genres: [],
+  detail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -92,6 +93,11 @@ function rootReducer(state = initialState, action) {
     case "POST_VIDEOGAME": // no hace nada
       return {
         ...state,
+      };
+    case "GET_DATEAIL":
+      return {
+        ...state,
+        detail: action.payload,
       };
 
     default:

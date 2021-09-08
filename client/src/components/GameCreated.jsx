@@ -76,6 +76,13 @@ export default function GameCreated() {
     });
   }
 
+  function handleDelete(e) {
+    setInput({
+      ...input,
+      genres: input.genres.filter((g) => g !== e),
+    });
+  }
+
   useEffect(() => {
     dispatch(getGenres());
   }, []);
@@ -166,6 +173,14 @@ export default function GameCreated() {
         </ul>
         <button type="submit">Create VideoGame</button>
       </form>
+      {input.genres.map((g) => (
+        <div className="divGenre">
+          <p>{g}</p>
+          <button className="botonDelete" onClick={() => handleDelete(g)}>
+            X
+          </button>
+        </div>
+      ))}
     </div>
   );
 }

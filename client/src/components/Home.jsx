@@ -71,7 +71,7 @@ export default function Home() {
 
   return (
     <div>
-      <Link to="/videogame">Created Video Game</Link>
+      <Link to="/creategame">Created Video Game</Link>
       <h1>VideoGame</h1>
       <button
         onClick={(e) => {
@@ -109,11 +109,6 @@ export default function Home() {
             <option key={g}> {g} </option>
           ))}
         </select> */}
-        <Paginado
-          gamesTotal={gamesPerPage}
-          allVideoGames={allVideoGames.length}
-          paginado={paginado}
-        />
         <SearchBar />
         {currentGames?.map((g) => {
           // condicion ???
@@ -133,6 +128,11 @@ export default function Home() {
           );
         })}
       </div>
+      <Paginado
+        gamesTotal={gamesPerPage}
+        allVideoGames={allVideoGames.length}
+        paginado={paginado}
+      />
     </div>
   );
 }

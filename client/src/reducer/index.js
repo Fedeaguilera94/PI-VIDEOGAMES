@@ -1,6 +1,7 @@
 const initialState = {
   videoGames: [],
   allVideoGames: [],
+  genres: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -16,6 +17,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videoGames: action.payload,
+      };
+    case "GET_GENRES":
+      return {
+        ...state,
+        genres: action.payload,
       };
     case "ORDER_BY_NAME":
       let sortArray =
@@ -82,6 +88,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoGames:
           action.payload === "all" ? state.allVideoGames : createdFilter,
+      };
+    case "POST_VIDEOGAME": // no hace nada
+      return {
+        ...state,
       };
 
     default:

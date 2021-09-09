@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   filterCreatedDB,
   getGenres,
-  getNameVideoGame,
   getVideoGames,
   orderByName,
   orderByRating,
+  filterByGenre,
 } from "../actions";
 import { Link } from "react-router-dom";
 import GameCard from "./GameCard";
@@ -75,6 +75,15 @@ export default function Home() {
   function handleFilterCreated(e) {
     e.preventDefault();
     dispatch(filterCreatedDB(e.target.value));
+    setCurrentPages(1);
+    setOrden(`Ordenado ${e.target.value}`);
+  }
+
+  function handleFilterGenre(e) {
+    e.preventDefault();
+    dispatch(filterByGenre(e.target.value));
+    setCurrentPages(1);
+    setOrden(`Ordenado ${e.target.value}`);
   }
 
   return (
@@ -111,7 +120,7 @@ export default function Home() {
           <option value="api">Existent</option>
         </select>
 
-        <select name="FilterGenre">
+        <select name="FilterGenre" onChange={(e) => handleFilterGenre(e)}>
           <option selected value="NullSelGenre">
             -Select Genre-
           </option>

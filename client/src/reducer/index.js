@@ -78,13 +78,26 @@ function rootReducer(state = initialState, action) {
 
     //___________________________________________
     case "FILTER_BY_GENRE":
-      return {};
+      const filtrado =
+        action.payload === "all"
+          ? state.allVideoGames
+          : state.allVideoGames.filter((g) => {
+              return g.genres.find((g) => {
+                return g.name === action.payload;
+              });
+            });
+      return {
+        ...state,
+        videoGames: filtrado,
+      };
 
     case "FILTER_CREATED":
       const createdFilter =
         action.payload === "created"
-          ? state.allVideoGames.filter((g) => g.created)
-          : state.allVideoGames.filter((g) => !g.created);
+          ? //? state.allVideoGames.filter((g) => g.created)
+            //: state.allVideoGames.filter((g) => !g.created);
+            state.allVideoGames.filter((g) => g.id.length > 10)
+          : state.allVideoGames.filter((g) => g.id.toString().length < 6);
       return {
         ...state,
         videoGames:

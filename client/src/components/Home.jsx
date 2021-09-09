@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterCreatedDB,
+  getGenres,
   getNameVideoGame,
   getVideoGames,
   orderByName,
@@ -15,6 +16,8 @@ import SearchBar from "./SearchBar";
 export default function Home() {
   const dispatch = useDispatch(); //hook
   const allVideoGames = useSelector((state) => state.videoGames); //mapstatetoprops =
+
+  const allGenre = useSelector((state) => state.genres);
 
   //_____________estados locales
   const [currentPages, setCurrentPages] = useState(1); //pagina actual 1
@@ -41,6 +44,10 @@ export default function Home() {
   const paginado = (pageNum) => {
     setCurrentPages(pageNum);
   };
+
+  useEffect(() => {
+    dispatch(getGenres());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getVideoGames());
@@ -102,6 +109,17 @@ export default function Home() {
           <option value="all">All</option>
           <option value="created">Created</option>
           <option value="api">Existent</option>
+        </select>
+
+        <select name="FilterGenre">
+          <option selected value="NullSelGenre">
+            -Select Genre-
+          </option>
+          {allGenre.map((genre) => (
+            <option key={genre.name} value={genre.name}>
+              {genre.name}
+            </option>
+          ))}
         </select>
 
         {/*  <select>

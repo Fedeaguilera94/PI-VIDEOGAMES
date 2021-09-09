@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
     },
 
     platforms: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, // era string
       allowNull: false,
     },
     created: {

@@ -33,7 +33,11 @@ export default function Detail(props) {
       />
       <h2>Released date: {detail.released || detail.releaseDate}</h2>
       <h2>Platforms:</h2>
-      {/* <h5>{detail.platforms?.map((p) => p.platform.name).join(", ")}</h5> */}
+      <h5>
+        {typeof detail.platforms === "string"
+          ? detail.platforms.replace(/,\s*$/, " ")
+          : detail.platforms?.map((p) => p.platform.name).join(", ")}
+      </h5>
       <h2>Genres: </h2>
       <h5>{detail.genres?.map((g) => g.name).join("-")}</h5>
       <h5>Rating :{detail.rating}</h5>

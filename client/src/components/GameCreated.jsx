@@ -27,7 +27,7 @@ export default function GameCreated() {
     description: "",
     releaseDate: "",
     rating: "",
-    platforms: "",
+    platforms: "", // era string
     genres: [],
   });
 
@@ -42,14 +42,13 @@ export default function GameCreated() {
         [e.target.name]: e.target.value,
       })
     );
-    console.log(input);
   }
 
   function handleCheck(e) {
     if (e.target.checked) {
       setInput({
         ...input,
-        platforms: e.target.value,
+        platforms: e.target.value + ", " + input.platforms,
       });
     }
   }
@@ -71,7 +70,7 @@ export default function GameCreated() {
       description: "",
       releaseDate: "",
       rating: "",
-      platforms: "",
+      platforms: "", // era string
       genres: [],
     });
   }
@@ -106,7 +105,7 @@ export default function GameCreated() {
         </div>
         <div>
           <label>Description:</label>
-          <textarea
+          <input
             type="text"
             value={input.description}
             name="description"

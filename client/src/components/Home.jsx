@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import GameCard from "./GameCard";
 import Paginado from "./Paginado";
 import SearchBar from "./SearchBar";
+import style from "./Home.module.css";
 export default function Home() {
   const dispatch = useDispatch(); //hook
   const allVideoGames = useSelector((state) => state.videoGames); //mapstatetoprops =
@@ -138,25 +139,25 @@ export default function Home() {
           ))}
         </select> */}
         <SearchBar />
+      </div>
+      <ul className={style.gameGrid}>
         {currentGames?.map((g) => {
           // condicion ???
 
           return (
-            <div>
-              <Link to={"/videogame/" + g.id}>
-                <GameCard
-                  id={g.id}
-                  name={g.name}
-                  image={g.image}
-                  genres={g.genres}
-                  key={g.id}
-                  rating={g.rating}
-                />
-              </Link>
-            </div>
+            <Link to={"/videogame/" + g.id}>
+              <GameCard
+                id={g.id}
+                name={g.name}
+                image={g.image}
+                genres={g.genres}
+                key={g.id}
+                rating={g.rating}
+              />
+            </Link>
           );
         })}
-      </div>
+      </ul>
       <Paginado
         gamesTotal={gamesPerPage}
         allVideoGames={allVideoGames.length}

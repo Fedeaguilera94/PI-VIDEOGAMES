@@ -1,0 +1,22 @@
+.gameCard {
+  list-style: none;
+}
+
+.gameImage {
+  border-radius: 10px;
+  background-color: azure;
+}
+.titleName {
+  font-size: 1.3rem;
+  color: white;
+  font-family: fantasy;
+}
+.ratingName {
+  font-size: 1rem;
+  color: beige;
+}
+
+.genreName {
+  font-size: 1.2rem;
+  color: beige;
+}

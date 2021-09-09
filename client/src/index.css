@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* aca poner fondo*/
+  background-color: rgb(0, 0, 0);
 }
 
 code {

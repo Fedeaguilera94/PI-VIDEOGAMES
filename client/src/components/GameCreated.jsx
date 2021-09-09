@@ -106,7 +106,7 @@ export default function GameCreated() {
         </div>
         <div>
           <label>Description:</label>
-          <input
+          <textarea
             type="text"
             value={input.description}
             name="description"

@@ -3,6 +3,7 @@ const initialState = {
   allVideoGames: [],
   genres: [],
   detail: [],
+  platforms: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -15,6 +16,9 @@ function rootReducer(state = initialState, action) {
       };
     //_____________________________________________
     case "GET_NAME_VIDEOGAME":
+      if (action.payload.hasOwnProperty("msg")) {
+        return alert(action.payload.msg);
+      }
       return {
         ...state,
         videoGames: action.payload,
@@ -78,10 +82,11 @@ function rootReducer(state = initialState, action) {
 
     //___________________________________________
     case "FILTER_BY_GENRE":
+      const todos = state.videoGames;
       const filtrado =
         action.payload === "all"
           ? state.allVideoGames
-          : state.allVideoGames.filter((g) => {
+          : todos.filter((g) => {
               return g.genres.find((g) => {
                 return g.name === action.payload;
               });
@@ -90,14 +95,32 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoGames: filtrado,
       };
+    case "FILTER_BY_PLATFORM":
+      const plataforma =
+        action.payload === "all"
+          ? state.allVideoGames
+          : state.allVideoGames.filter((g) => {
+              return g.platforms.find((g) => {
+                return g.name === action.payload;
+              });
+            });
+      return {
+        ...state,
+        videoGames: plataforma,
+      };
+
+    case "GET_PLATFORMS":
+      return {
+        ...state,
+        platforms: action.payload,
+      };
 
     case "FILTER_CREATED":
       const createdFilter =
         action.payload === "created"
-          ? //? state.allVideoGames.filter((g) => g.created)
-            //: state.allVideoGames.filter((g) => !g.created);
-            state.allVideoGames.filter((g) => g.id.length > 10)
-          : state.allVideoGames.filter((g) => g.id.toString().length < 6);
+          ? state.allVideoGames.filter((g) => g.created)
+          : state.allVideoGames.filter((g) => !g.created);
+
       return {
         ...state,
         videoGames:

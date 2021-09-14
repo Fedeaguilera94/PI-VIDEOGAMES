@@ -1,0 +1,36 @@
+.backwelcome {
+  background: url(https://evoplay.games/wp-content/uploads/2021/03/1920x1080.jpg);
+  color: white;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.circle {
+  position: relative;
+  top: 25%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 0vh;
+  height: 25vh;
+  width: 25vh;
+  background-color: rgba(12, 12, 11, 0.8);
+
+  border-radius: 50px;
+  color: #e3eef5;
+  box-shadow: rgb(77, 133, 236) 0 -1px 7px 1px,
+    inset rgb(233, 66, 122) 0 -1px 15px, rgb(226, 120, 33) 0 2px 12px;
+}
+
+.btn {
+  background-color: transparent;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #e78122;
+  box-shadow: rgb(77, 133, 236) 0 -1px 70px 1px,
+    inset rgb(233, 66, 122) 0 -1px 1px, rgb(226, 120, 33) 0 2px 12px;
+}

@@ -4,7 +4,7 @@ const { API_KEY } = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require("axios");
-const { Genre, Videogame } = require("../db");
+const { Genre, Videogame, Platforms } = require("../db");
 const router = Router();
 
 // Configurar los routers
@@ -12,6 +12,8 @@ const router = Router();
 
 //______________________________________________________________________________
 const getGames = async () => {
+  // PROBAR PROMISE ALL
+
   // VER TRY CATCH!!!!!!!!!!!!!!!
   const url1 = await axios.get(
     `https://api.rawg.io/api/games?key=${API_KEY}&page=1`
@@ -37,19 +39,14 @@ const getGames = async () => {
     url5.data.results
   );
 
-  /*   for (let i = 0; i < url.length; i++) {
-    for (let j = 0; j < url[i].data.results.length; j++) {
-      // probar .FLAT()
-      apiGame.push(url[i].data.results[j]);
-    }
-  } */
-
   apiGame = apiGame.map((game) => {
+    const plataformas = game.platforms.map((g) => g.platform);
     return {
       id: game.id,
       name: game.name,
       image: game.background_image,
       genres: game.genres,
+      platforms: plataformas,
 
       rating: game.rating,
       released: game.released,
@@ -57,6 +54,7 @@ const getGames = async () => {
   });
   return apiGame;
 };
+
 const dataBase = async () => {
   return await Videogame.findAll({
     include: {
@@ -84,32 +82,14 @@ router.get("/videogames", async (req, res) => {
     let searchGame = totalGames.filter((game) =>
       game.name.toLowerCase().includes(name.toLowerCase())
     );
+
     searchGame.length
       ? res.status(200).send(searchGame)
-      : res.status(404).send("Game not found");
+      : res.status(200).json({ msg: `Error ${name} not found` });
   } else {
     res.status(200).json(totalGames);
   }
 });
-//_________________________________________________
-
-/* router.get("/genre", async (req, res) => {
-  const genresDb = await Genre.findAll();
-  if (genresDb.length) return res.send("Hay generos en la DB");
-
-  const apiData = await axios.get(
-    `https://api.rawg.io/api/genre?key=${API_KEY}`
-  );
-  const genres = apiData.data.results;
-  genres.forEach(async (g) => {
-    await Genre.findOrCreate({
-      where: {
-        name: g.name,
-      },
-    });
-  });
-  res.json(genres);
-}); */
 
 router.get("/genres", async (req, res) => {
   /*   const genresDb = await Genre.findAll(); // compruebo si hay evito crear 2 veces
@@ -121,8 +101,6 @@ router.get("/genres", async (req, res) => {
   const genres = response.data.results;
   genres.forEach(async (g) => {
     await Genre.findOrCreate({
-      // creo la tabla con name
-
       where: {
         name: g.name,
       },
@@ -130,6 +108,26 @@ router.get("/genres", async (req, res) => {
   });
   const allGenres = await Genre.findAll();
   res.send(allGenres);
+});
+
+router.get("/platforms", async (req, res) => {
+  try {
+    const platformsApi = await axios.get(
+      `https://api.rawg.io/api/platforms?key=${API_KEY}`
+    );
+    const plataformas = platformsApi.data.results;
+    plataformas.forEach(async (g) => {
+      await Platforms.findOrCreate({
+        where: {
+          name: g.name,
+        },
+      });
+    });
+    const platformsDataBase = await Platforms.findAll();
+    res.json(platformsDataBase);
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 //await Genre.bulkCreate(response) cambiar por forEACH
@@ -142,7 +140,7 @@ router.post("/videogame", async (req, res) => {
     name,
     description,
     releaseDate,
-    rating,
+    rating: rating || 1,
     platforms,
     created,
     genres,
@@ -158,15 +156,6 @@ router.post("/videogame", async (req, res) => {
 
   res.send("created videoGame");
 });
-
-/*
-let genDb = await Genre.findAll({
-    where: { name: genres },
-  });
-  videogameCreated.addGenres(genDb);
-  res.status(201).send("Tu Videojuego fué creado con éxito");
-}),
-*/
 
 //____________________________________________________
 router.get("/videogames/:id", async (req, res) => {

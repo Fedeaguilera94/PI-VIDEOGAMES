@@ -1,0 +1,25 @@
+.detailContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.col {
+  max-width: auto;
+  margin: 15px;
+  height: auto;
+
+  width: 80%;
+}
+
+.gameDetails {
+  font-size: 1.5rem;
+}
+.imgDetail {
+  border-radius: 10px;
+  filter: drop-shadow(9px 14px 81px #5c5151);
+}
+
+.firstItem {
+  margin-top: 0;
+}

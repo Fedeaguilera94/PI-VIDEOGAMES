@@ -16,6 +16,7 @@ export function getNameVideoGame(name) {
       var json = await axios.get(
         "http://localhost:3001/videogames?name=" + name
       );
+
       return dispatch({
         type: "GET_NAME_VIDEOGAME",
         payload: json.data,
@@ -84,5 +85,18 @@ export function getDetail(id) {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+
+export function getPlatforms() {
+  return async function (dispatch) {
+    const json = await axios.get(`http://localhost:3001/platforms`);
+    return dispatch({ type: "GET_PLATFORMS", payload: json.data });
+  };
+}
+export function filterByPlatform(payload) {
+  return {
+    type: "FILTER_BY_PLATFORM",
+    payload,
   };
 }

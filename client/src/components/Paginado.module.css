@@ -1,4 +1,15 @@
 .paginado {
   color: white;
   cursor: pointer;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  margin: 10px;
+  font-size: 1.4rem;
+}
+.pos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list {
+  list-style: none;
 }

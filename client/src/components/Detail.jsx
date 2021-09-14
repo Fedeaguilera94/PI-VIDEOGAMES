@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Link, _useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../actions/index";
+import styles from "./Detail.module.css";
 
 export default function Detail(props) {
   const dispatch = useDispatch();
@@ -10,40 +11,57 @@ export default function Detail(props) {
 
   useEffect(() => {
     dispatch(getDetail(id));
-  }, [dispatch]);
+  }, [id, dispatch]);
   const detail = useSelector((state) => state.detail);
 
   //console.log(detail.platforms.map((p) => p.platform.name)); PLATAFORMAS
   //console.log(detail.genres.map((g) => g.name).join("-")); GENEROS
-
+  const imgUrl =
+    "https://thumbs.dreamstime.com/b/se%C3%B1al-de-ne%C3%B3n-la-m%C3%A1quina-juego-arcada-122983326.jpg";
   return (
-    <div>
+    <div className={styles.detailContainer}>
       <Link to="/home">
-        <button>Home</button>
+        <button className={styles.btn}>Home</button>
       </Link>
-      <h1>{detail.name}</h1>
-      <img
-        src={
-          detail.background_image ||
-          "https://myvideogamelist.com/assets/images/default.png"
-        }
-        alt="img not found"
-        width="600px"
-        height="340px"
-      />
-      <h2>Released date: {detail.released || detail.releaseDate}</h2>
-      <h2>Platforms:</h2>
-      <h5>
-        {typeof detail.platforms === "string"
-          ? detail.platforms.replace(/,\s*$/, " ")
-          : detail.platforms?.map((p) => p.platform.name).join(", ")}
-      </h5>
-      <h2>Genres: </h2>
-      <h5>{detail.genres?.map((g) => g.name).join("-")}</h5>
-      <h5>Rating :{detail.rating}</h5>
-      <h1>Description :</h1>
+      <div className={styles.detailContainer}>
+        <img
+          className={`${styles.col} ${styles.imgDetail}`}
+          src={detail.background_image || imgUrl}
+          alt={detail.name}
+        />
+        <div className={`${styles.col} ${styles.gameDetails}`}>
+          <p className={styles.firstItem}>
+            <strong>Title: </strong> {detail.name}
+          </p>
 
-      <p> {detail.description_raw || detail.description}</p>
+          <p>
+            <strong>Released date:</strong>{" "}
+            {detail.released || detail.releaseDate}
+          </p>
+
+          <p>
+            <strong>Platforms: </strong>
+            {typeof detail.platforms === "string"
+              ? detail.platforms.replace(/,\s*$/, " ")
+              : detail.platforms?.map((p) => p.platform.name).join(", ")}
+          </p>
+
+          <p>
+            <strong>Genres: </strong>
+            {detail.genres?.map((g) => g.name).join("-")}
+          </p>
+
+          <p>
+            <strong>Rating: </strong>
+            {detail.rating}
+          </p>
+
+          <p>
+            <strong>Description: </strong>
+            {detail.description_raw || detail.description}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

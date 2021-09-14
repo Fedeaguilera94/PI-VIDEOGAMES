@@ -1,0 +1,70 @@
+.CreateVideogame {
+  position: relative;
+  top: 10%;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 0vh;
+
+  width: 40vh;
+  background-color: rgba(12, 12, 11, 0.8);
+
+  border-radius: 50px;
+  color: #e3eef5;
+  box-shadow: rgb(77, 133, 236) 0 -1px 7px 1px,
+    inset rgb(233, 66, 122) 0 -1px 15px, rgb(226, 120, 33) 0 2px 12px;
+}
+.Title {
+  display: flex;
+  justify-content: center;
+  text-shadow: 1px 2px 3px rgba(128, 0, 0, 1);
+}
+.CreationForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+.errors {
+  color: red;
+  font-size: 15px;
+}
+
+.btnHome {
+  background-color: transparent;
+  color: white;
+  border-radius: 5px;
+
+  cursor: pointer;
+  border: 1px solid #e78122;
+  box-shadow: rgb(77, 133, 236) 0 -1px 70px 1px,
+    inset rgb(233, 66, 122) 0 -1px 1px, rgb(226, 120, 33) 0 2px 12px;
+  transition: width 1s, box-shadow 1s;
+}
+.divHome {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+.botonDelete {
+  background-color: transparent;
+  color: white;
+  border-radius: 5px;
+
+  cursor: pointer;
+  border: 1px solid #e78122;
+  box-shadow: rgb(77, 133, 236) 0 -1px 70px 1px,
+    inset rgb(233, 66, 122) 0 -1px 1px, rgb(226, 120, 33) 0 2px 12px;
+  transition: width 1s, box-shadow 1s;
+}
+.inputC {
+  margin: 10px 0 10px 0;
+  padding: 15px;
+  font-size: 15px;
+
+  justify-content: center;
+}
+div {
+  justify-content: center;
+}

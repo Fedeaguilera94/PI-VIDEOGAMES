@@ -26,7 +26,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.5.1",
     "postgres": "^1.0.2",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "supertest-as-promised": "^4.0.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",

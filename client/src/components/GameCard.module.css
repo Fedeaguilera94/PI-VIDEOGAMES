@@ -1,22 +1,35 @@
 .gameCard {
   list-style: none;
 }
+.gameCard:hover {
+  filter: blur(1px);
+}
 
 .gameImage {
   border-radius: 10px;
   background-color: azure;
+  filter: drop-shadow(3px 9px 30px #5c5151);
 }
 .titleName {
-  font-size: 1.3rem;
-  color: white;
-  font-family: fantasy;
+  text-align: center;
+  font-size: 1.6rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .ratingName {
+  text-align: center;
   font-size: 1rem;
   color: beige;
 }
 
 .genreName {
-  font-size: 1.2rem;
-  color: beige;
+  text-align: center;
+  font-size: 1rem;
+  color: rgb(153, 153, 90);
+}
+
+@media (max-width: 560px) {
+  .gameImage {
+    width: 90%;
+    height: auto;
+  }
 }

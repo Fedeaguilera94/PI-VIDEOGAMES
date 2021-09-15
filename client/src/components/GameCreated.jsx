@@ -12,7 +12,7 @@ function validate(input) {
   if (!input.description.trim()) {
     error.description = "Description require";
   }
-  if (!input.platforms.trim()) {
+  if (!input.platforms) {
     error.platforms = "Platforms require";
   }
   return error;
@@ -21,6 +21,8 @@ function validate(input) {
 export default function GameCreated() {
   const dispatch = useDispatch();
   const generos = useSelector((state) => state.genres);
+  const plataformas = useSelector((state) => state.platforms);
+
   const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
@@ -28,7 +30,7 @@ export default function GameCreated() {
     description: "",
     releaseDate: "",
     rating: "",
-    platforms: "", // era string
+    platforms: [], // era string[{name:ps5},{name:}]
     genres: [],
   });
   console.log(input);
@@ -47,13 +49,11 @@ export default function GameCreated() {
     );
   }
 
-  function handleCheck(e) {
-    if (e.target.checked) {
-      setInput({
-        ...input,
-        platforms: e.target.value + ", " + input.platforms,
-      });
-    }
+  function handleSelectPlatform(e) {
+    setInput({
+      ...input,
+      platforms: [...input.platforms, e.target.value],
+    });
   }
 
   function handleSelect(e) {
@@ -79,7 +79,7 @@ export default function GameCreated() {
         description: "",
         releaseDate: "",
         rating: "",
-        platforms: "", // era string
+        platforms: [], // era string
         genres: [],
       });
     } else {
@@ -92,6 +92,13 @@ export default function GameCreated() {
     setInput({
       ...input,
       genres: input.genres.filter((g) => g !== e),
+    });
+  }
+
+  function handleDeletePlat(e) {
+    setInput({
+      ...input,
+      platforms: input.platforms.filter((g) => g !== e),
     });
   }
 
@@ -132,7 +139,27 @@ export default function GameCreated() {
           )}
         </div>
 
-        <div className={styles.Checkbox}>
+        {/*                    PRUEBA                                    */}
+
+        <select onChange={(e) => handleSelectPlatform(e)}>
+          {plataformas.map((g) => (
+            <option value={g.name}>{g.name}</option>
+          ))}
+        </select>
+
+        {input.platforms.map((g) => (
+          <div className="divGenre">
+            <p>{g}</p>
+            <button
+              className={styles.botonDelete}
+              onClick={() => handleDeletePlat(g)}
+            >
+              X
+            </button>
+          </div>
+        ))}
+
+        {/*   <div className={styles.Checkbox}>
           <p>Platforms:</p>
           <label>
             <input
@@ -182,7 +209,7 @@ export default function GameCreated() {
           {errors.platforms && (
             <p className={styles.errors}>{errors.platforms}</p>
           )}
-        </div>
+        </div> */}
 
         <div>
           {/*   <label>Release Date:</label> */}
@@ -212,9 +239,6 @@ export default function GameCreated() {
             <option value={g.name}>{g.name}</option>
           ))}
         </select>
-        <ul>
-          <li> {input.genres.map((g) => g + " ,")}</li>
-        </ul>
 
         {input.genres.map((g) => (
           <div className="divGenre">

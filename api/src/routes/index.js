@@ -4,7 +4,7 @@ const { API_KEY } = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require("axios");
-const { Genre, Videogame, Platforms } = require("../db");
+const { Genre, Videogame, Platform } = require("../db");
 const router = Router();
 
 // Configurar los routers
@@ -57,14 +57,8 @@ const getGames = async () => {
 
 const dataBase = async () => {
   return await Videogame.findAll({
-    include: {
-      model: Genre,
-      attributes: ["name"], // traigo el nombre del genero
-      through: {
-        // comprobacion
-        atrributes: [],
-      },
-    },
+    include: [Genre, Platform],
+    // traigo el nombre del genero
   });
 };
 
@@ -85,7 +79,7 @@ router.get("/videogames", async (req, res) => {
 
     searchGame.length
       ? res.status(200).send(searchGame)
-      : res.status(200).json({ msg: `Error ${name} not found` });
+      : res.status(404).json({ msg: "Game not Found" });
   } else {
     res.status(200).json(totalGames);
   }
@@ -117,13 +111,13 @@ router.get("/platforms", async (req, res) => {
     );
     const plataformas = platformsApi.data.results;
     plataformas.forEach(async (g) => {
-      await Platforms.findOrCreate({
+      await Platform.findOrCreate({
         where: {
           name: g.name,
         },
       });
     });
-    const platformsDataBase = await Platforms.findAll();
+    const platformsDataBase = await Platform.findAll();
     res.json(platformsDataBase);
   } catch (err) {
     res.send(err);
@@ -141,20 +135,32 @@ router.post("/videogame", async (req, res) => {
     description,
     releaseDate,
     rating: rating || 1,
-    platforms,
+    //platforms,
     created,
-    genres,
+    //genres,
   });
-  genres.forEach(async (g) => {
+  /*   genres.forEach(async (g) => {
     let game = await Genre.findAll({
       where: {
         name: g,
       },
     });
+    let dbPlatform = await Platform.findAll({
+      where: { name: platfroms },
+    });
+    createVideogame.addPlatforms(dbPlatform);
     await gameCreated.addGenre(game);
+  }); */
+  let dbGenre = await Genre.findAll({
+    where: { name: genres },
   });
+  let dbPlatform = await Platform.findAll({
+    where: { name: platforms },
+  });
+  gameCreated.addGenres(dbGenre);
+  gameCreated.addPlatforms(dbPlatform);
 
-  res.send("created videoGame");
+  res.status(200).send(gameCreated);
 });
 
 //____________________________________________________
@@ -164,7 +170,7 @@ router.get("/videogames/:id", async (req, res) => {
     if (id.includes("-")) {
       const gameDB = await Videogame.findOne({
         where: { id },
-        include: [Genre],
+        include: [Genre, Platform],
       });
       return res.json(gameDB);
     }

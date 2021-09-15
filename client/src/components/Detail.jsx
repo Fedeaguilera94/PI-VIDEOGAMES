@@ -14,6 +14,14 @@ export default function Detail(props) {
   }, [id, dispatch]);
   const detail = useSelector((state) => state.detail);
 
+  /*   if (detail?.platforms[0].hasOwnProperty("platform")) {
+    var apiPlatform = detail.platforms.map((p) => p.platform.name);
+  }
+
+  if (detail.platforms.hasOwnProperty("name")) {
+    var dbPlatform = detail.platforms.map((p) => p.name);
+  } */
+
   //console.log(detail.platforms.map((p) => p.platform.name)); PLATAFORMAS
   //console.log(detail.genres.map((g) => g.name).join("-")); GENEROS
   const imgUrl =
@@ -41,9 +49,10 @@ export default function Detail(props) {
 
           <p>
             <strong>Platforms: </strong>
-            {typeof detail.platforms === "string"
-              ? detail.platforms.replace(/,\s*$/, " ")
-              : detail.platforms?.map((p) => p.platform.name).join(", ")}
+
+            {detail.id.length > 7
+              ? detail.platforms.map((p) => p.name).join(" - ")
+              : detail.platforms.map((p) => p.platform.name).join(" - ")}
           </p>
 
           <p>

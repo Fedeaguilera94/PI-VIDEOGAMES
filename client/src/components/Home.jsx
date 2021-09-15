@@ -156,6 +156,7 @@ export default function Home() {
               genres={g.genres}
               key={g.id}
               rating={g.rating}
+              platforms={g.platforms}
             />
           );
         })}

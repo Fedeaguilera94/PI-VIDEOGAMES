@@ -22,7 +22,7 @@ export function getNameVideoGame(name) {
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      alert("Game Not Found");
     }
   };
 }

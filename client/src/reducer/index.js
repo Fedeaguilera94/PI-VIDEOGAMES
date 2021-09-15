@@ -16,9 +16,6 @@ function rootReducer(state = initialState, action) {
       };
     //_____________________________________________
     case "GET_NAME_VIDEOGAME":
-      if (action.payload.hasOwnProperty("msg")) {
-        return alert(action.payload.msg);
-      }
       return {
         ...state,
         videoGames: action.payload,

@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./GameCard.module.css";
 import { Link } from "react-router-dom";
 
-export default function Card({ name, image, genres, id, rating }) {
+export default function Card({ name, image, genres, id, rating, platforms }) {
   let genero = genres.map((e) => e.name);
+  let plataforma = platforms.map((p) => p.name);
   const imgUrl =
     "https://thumbs.dreamstime.com/b/se%C3%B1al-de-ne%C3%B3n-la-m%C3%A1quina-juego-arcada-122983326.jpg";
 

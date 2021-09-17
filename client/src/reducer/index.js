@@ -92,19 +92,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoGames: filtrado,
       };
-    case "FILTER_BY_PLATFORM":
-      const plataforma =
-        action.payload === "all"
-          ? state.allVideoGames
-          : state.allVideoGames.filter((g) => {
-              return g.platforms.find((g) => {
-                return g.name === action.payload;
-              });
-            });
-      return {
-        ...state,
-        videoGames: plataforma,
-      };
 
     case "GET_PLATFORMS":
       return {

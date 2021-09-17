@@ -12,9 +12,8 @@ const router = Router();
 
 //______________________________________________________________________________
 const getGames = async () => {
-  // PROBAR PROMISE ALL
+  let apiGame = [];
 
-  // VER TRY CATCH!!!!!!!!!!!!!!!
   const url1 = await axios.get(
     `https://api.rawg.io/api/games?key=${API_KEY}&page=1`
   );
@@ -31,7 +30,6 @@ const getGames = async () => {
     `https://api.rawg.io/api/games?key=${API_KEY}&page=5`
   );
 
-  let apiGame = [];
   apiGame = url1.data.results.concat(
     url2.data.results,
     url3.data.results,
@@ -86,22 +84,23 @@ router.get("/videogames", async (req, res) => {
 });
 
 router.get("/genres", async (req, res) => {
-  /*   const genresDb = await Genre.findAll(); // compruebo si hay evito crear 2 veces
-  if (genresDb.length) return res.send("Genres in DB"); */
-
-  const response = await axios.get(
-    `https://api.rawg.io/api/genres?key=${API_KEY}`
-  );
-  const genres = response.data.results;
-  genres.forEach(async (g) => {
-    await Genre.findOrCreate({
-      where: {
-        name: g.name,
-      },
+  try {
+    const response = await axios.get(
+      `https://api.rawg.io/api/genres?key=${API_KEY}`
+    );
+    const genres = response.data.results;
+    genres.forEach(async (g) => {
+      await Genre.findOrCreate({
+        where: {
+          name: g.name,
+        },
+      });
     });
-  });
-  const allGenres = await Genre.findAll();
-  res.send(allGenres);
+    const allGenres = await Genre.findAll();
+    res.send(allGenres);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.get("/platforms", async (req, res) => {
@@ -124,8 +123,6 @@ router.get("/platforms", async (req, res) => {
   }
 });
 
-//await Genre.bulkCreate(response) cambiar por forEACH
-
 router.post("/videogame", async (req, res) => {
   let { name, description, releaseDate, rating, genres, platforms, created } =
     req.body;
@@ -139,18 +136,7 @@ router.post("/videogame", async (req, res) => {
     created,
     //genres,
   });
-  /*   genres.forEach(async (g) => {
-    let game = await Genre.findAll({
-      where: {
-        name: g,
-      },
-    });
-    let dbPlatform = await Platform.findAll({
-      where: { name: platfroms },
-    });
-    createVideogame.addPlatforms(dbPlatform);
-    await gameCreated.addGenre(game);
-  }); */
+
   let dbGenre = await Genre.findAll({
     where: { name: genres },
   });
@@ -164,6 +150,7 @@ router.post("/videogame", async (req, res) => {
 });
 
 //____________________________________________________
+
 router.get("/videogames/:id", async (req, res) => {
   const { id } = req.params;
   try {

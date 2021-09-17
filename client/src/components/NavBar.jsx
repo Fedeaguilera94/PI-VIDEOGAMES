@@ -9,10 +9,8 @@ export default function NavBar({
   handleFilterCreated,
   handleScore,
   handleSort,
-  handleFilterPlatform,
 }) {
   const allGenre = useSelector((state) => state.genres);
-  const allPlatforms = useSelector((state) => state.platforms);
 
   return (
     <div className={styles.Conteiner}>
@@ -75,14 +73,6 @@ export default function NavBar({
         {allGenre.map((genre) => (
           <option key={genre.name} value={genre.name}>
             {genre.name}
-          </option>
-        ))}
-      </select>
-
-      <select onChange={(e) => handleFilterPlatform(e)}>
-        {allPlatforms.map((platform) => (
-          <option key={platform.name} value={platform.name}>
-            {platform.name}
           </option>
         ))}
       </select>

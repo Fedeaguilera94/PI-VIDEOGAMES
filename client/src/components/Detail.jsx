@@ -6,6 +6,7 @@ import styles from "./Detail.module.css";
 
 export default function Detail(props) {
   const dispatch = useDispatch();
+  console.log("detail", props);
 
   const { id } = props.match.params;
 
@@ -14,18 +15,9 @@ export default function Detail(props) {
   }, [id, dispatch]);
   const detail = useSelector((state) => state.detail);
 
-  /*   if (detail?.platforms[0].hasOwnProperty("platform")) {
-    var apiPlatform = detail.platforms.map((p) => p.platform.name);
-  }
-
-  if (detail.platforms.hasOwnProperty("name")) {
-    var dbPlatform = detail.platforms.map((p) => p.name);
-  } */
-
-  //console.log(detail.platforms.map((p) => p.platform.name)); PLATAFORMAS
-  //console.log(detail.genres.map((g) => g.name).join("-")); GENEROS
   const imgUrl =
     "https://thumbs.dreamstime.com/b/se%C3%B1al-de-ne%C3%B3n-la-m%C3%A1quina-juego-arcada-122983326.jpg";
+
   return (
     <div className={styles.detailContainer}>
       <Link to="/home">
@@ -50,9 +42,9 @@ export default function Detail(props) {
           <p>
             <strong>Platforms: </strong>
 
-            {detail.id.length > 7
-              ? detail.platforms.map((p) => p.name).join(" - ")
-              : detail.platforms.map((p) => p.platform.name).join(" - ")}
+            {detail.id?.length > 7
+              ? detail.platforms?.map((p) => p.name).join(" - ")
+              : detail.platforms?.map((p) => p.platform.name).join(" - ")}
           </p>
 
           <p>

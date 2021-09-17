@@ -12,7 +12,7 @@ function validate(input) {
   if (!input.description.trim()) {
     error.description = "Description require";
   }
-  if (!input.platforms) {
+  if (!input.platforms.length) {
     error.platforms = "Platforms require";
   }
   return error;
@@ -33,8 +33,7 @@ export default function GameCreated() {
     platforms: [], // era string[{name:ps5},{name:}]
     genres: [],
   });
-  console.log(input);
-  console.log(errors);
+
   function handleChange(e) {
     setInput({
       ...input,
@@ -111,7 +110,6 @@ export default function GameCreated() {
       <h1 className={styles.Title}>Create Your VideoGame</h1>
       <form className={styles.CreationForm} onSubmit={(e) => handleSubmit(e)}>
         <div>
-          {/*   <label>Name:</label> */}
           <input
             className={styles.inputC}
             placeholder="Name videogame"
@@ -124,7 +122,6 @@ export default function GameCreated() {
           {errors.name && <p className={styles.errors}>{errors.name}</p>}
         </div>
         <div>
-          {/*   <label>Description:</label> */}
           <input
             className={styles.inputC}
             placeholder="Description videogame"
@@ -141,6 +138,7 @@ export default function GameCreated() {
 
         {/*                    PRUEBA                                    */}
 
+        <p>Platforms</p>
         <select onChange={(e) => handleSelectPlatform(e)}>
           {plataformas.map((g) => (
             <option value={g.name}>{g.name}</option>
@@ -158,61 +156,11 @@ export default function GameCreated() {
             </button>
           </div>
         ))}
-
-        {/*   <div className={styles.Checkbox}>
-          <p>Platforms:</p>
-          <label>
-            <input
-              type="checkbox"
-              name="platforms"
-              value="Ps5"
-              onChange={(e) => handleCheck(e)}
-            />
-            PS5
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="platforms"
-              value="SEGA"
-              onChange={(e) => handleCheck(e)}
-            />
-            SEGA
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="platforms"
-              value="LINUX"
-              onChange={(e) => handleCheck(e)}
-            />
-            LINUX
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="platforms"
-              value="Pc"
-              onChange={(e) => handleCheck(e)}
-            />
-            Pc
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="platforms"
-              value="Xbox"
-              onChange={(e) => handleCheck(e)}
-            />
-            Xbox
-          </label>
-          {errors.platforms && (
-            <p className={styles.errors}>{errors.platforms}</p>
-          )}
-        </div> */}
+        {errors.platforms && (
+          <p className={styles.errors}>{errors.platforms}</p>
+        )}
 
         <div>
-          {/*   <label>Release Date:</label> */}
           <p>Release date</p>
           <input
             type="date"
@@ -222,7 +170,6 @@ export default function GameCreated() {
           />
         </div>
         <div>
-          {/*  <label>Rating:</label> */}
           <p>Rating:</p>
           <input
             type="number"
@@ -233,6 +180,7 @@ export default function GameCreated() {
             onChange={(e) => handleChange(e)}
           />
         </div>
+        <p>Genres</p>
 
         <select onChange={(e) => handleSelect(e)}>
           {generos.map((g) => (

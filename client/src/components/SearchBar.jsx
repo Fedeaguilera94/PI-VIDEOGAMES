@@ -16,8 +16,12 @@ export default function SearchBar() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getNameVideoGame(name));
-    setName("");
+    if (!name.length) {
+      alert("Please Writing a VideoGame");
+    } else {
+      dispatch(getNameVideoGame(name));
+      setName("");
+    }
   }
 
   return (

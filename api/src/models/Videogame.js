@@ -25,10 +25,6 @@ module.exports = (sequelize) => {
       type: DataTypes.REAL,
     },
 
-    /*    platforms: {
-      type: DataTypes.STRING, // era string
-      allowNull: false,
-    }, */
     created: {
       // en DB lo diferencio
       type: DataTypes.BOOLEAN,

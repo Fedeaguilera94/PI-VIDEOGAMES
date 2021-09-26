@@ -13,9 +13,10 @@ import {
 import GameCard from "./GameCard";
 import Paginado from "./Paginado";
 //import SearchBar from "./SearchBar";
-import style from "./Home.module.css";
+import styles from "./Home.module.css";
 import NavBar from "./NavBar";
 import Spinner from "./Spinner";
+import { Link } from "react-router-dom";
 export default function Home() {
   const dispatch = useDispatch(); //hook
   const allVideoGames = useSelector((state) => state.videoGames); //mapstatetoprops =
@@ -85,16 +86,22 @@ export default function Home() {
 
   return (
     <div>
-      <button
-        className={style.btn}
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Reload Games
-      </button>
-
-      <div className={style.navBar}>
+      <div className={styles.btnhome}>
+        <Link className={styles.link} to="/creategame">
+          Create videogame
+        </Link>
+      </div>
+      <div className={styles.btnreload}>
+        <button
+          className={styles.btn30}
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
+          Reload Games
+        </button>
+      </div>
+      <div>
         <NavBar
           handleSort={handleSort}
           handleScore={handleScore}
@@ -103,7 +110,7 @@ export default function Home() {
         />
       </div>
 
-      <ul className={style.gameGrid}>
+      <ul className={styles.gameGrid}>
         {currentGames?.map((g) => {
           // condicion ?
 

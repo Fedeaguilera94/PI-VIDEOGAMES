@@ -8,7 +8,7 @@ export default function LandingPage() {
       <div className={styles.circle}>
         <p>Video Games App</p>
         <Link to="/home">
-          <button className={styles.btn}>Enter</button>
+          <button className={styles.bn30}>Enter</button>
         </Link>
         <p>Welcome</p>
       </div>

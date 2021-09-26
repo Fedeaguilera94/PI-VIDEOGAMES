@@ -1,16 +1,29 @@
-.selectCont {
-  box-shadow: rgb(77, 133, 236) 0 -1px 7px 1px,
-    inset rgb(233, 66, 122) 0 -1px 15px, rgb(226, 120, 33) 0 2px 12px;
-  padding: 0.5em 1em;
-  color: #e3eef5;
-  font-size: 1rem;
-  background-color: rgba(12, 12, 11, 0.8);
-  cursor: pointer;
-  border: 1px solid #e78122;
-  box-shadow: rgb(77, 133, 236) 0 -1px 70px 1px,
-    inset rgb(233, 66, 122) 0 -1px 1px, rgb(226, 120, 33) 0 2px 12px;
-  transition: width 1s, box-shadow 1s;
+.conteiner {
+  display: flex;
+  text-align: center;
 }
-.search {
-  box-sizing: content-box;
+
+.selectCont {
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  height: 2rem;
+  width: 7rem;
+  letter-spacing: 0.1em;
+  font-size: 19px;
+  border-style: groove;
+  border-color: blueviolet;
+  background-color: black;
+  font-family: "Rubik";
+  color: white;
+  -webkit-appearance: none;
+}
+
+option {
+  font-size: 15px;
+  background-color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

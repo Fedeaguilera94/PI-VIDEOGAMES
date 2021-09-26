@@ -7,24 +7,32 @@
 
 .gameImage {
   border-radius: 10px;
+  border: 1px solid #5b1ce6;
   background-color: azure;
-  filter: drop-shadow(3px 9px 30px #5c5151);
 }
 .titleName {
   text-align: center;
-  font-size: 1.6rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.1rem;
+  font-family: "Rubik", sans-serif;
+  color: white;
+  margin: 0.5rem;
 }
-.ratingName {
+.ratingTitle {
   text-align: center;
-  font-size: 1rem;
-  color: beige;
+  font-size: 1.3rem;
+  color: white;
+}
+.rating {
+  text-align: center;
 }
 
-.genreName {
+.genreTitle {
   text-align: center;
-  font-size: 1rem;
-  color: rgb(153, 153, 90);
+  font-size: 1.3rem;
+  color: white;
+}
+.genre {
+  text-align: center;
 }
 
 @media (max-width: 560px) {
@@ -32,4 +40,15 @@
     width: 90%;
     height: auto;
   }
+}
+.linetwo {
+  width: 75%;
+
+  margin: 0 auto;
+  display: block;
+}
+.line {
+  width: 100%;
+
+  display: block;
 }

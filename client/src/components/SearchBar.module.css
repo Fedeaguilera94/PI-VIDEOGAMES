@@ -1,24 +1,26 @@
-.container {
-  box-shadow: rgb(77, 133, 236) 0 -1px 7px 1px,
-    inset rgb(233, 66, 122) 0 -1px 15px, rgb(226, 120, 33) 0 2px 12px;
-
-  color: #e3eef5;
-  font-size: 0.9rem;
-  background-color: rgba(12, 12, 11, 0.8);
-
-  border: 1px solid #e78122;
-  box-shadow: rgb(77, 133, 236) 0 -1px 70px 1px,
-    inset rgb(233, 66, 122) 0 -1px 1px, rgb(226, 120, 33) 0 2px 12px;
-  transition: width 1s, box-shadow 1s;
+.searchbar {
+  width: 60rem;
+  outline: none;
+  height: 3rem;
+  border-radius: 4px;
+  border: none;
 }
 
-.btn {
-  background-color: transparent;
-  color: white;
-  border-radius: 5px;
+.conteiner {
+  position: relative;
+}
+
+.bn30 {
+  position: absolute;
+  right: 0;
+
+  top: 0;
+  height: 100%;
   cursor: pointer;
-  border: 1px solid #e78122;
-  box-shadow: rgb(77, 133, 236) 0 -1px 70px 1px,
-    inset rgb(233, 66, 122) 0 -1px 1px, rgb(226, 120, 33) 0 2px 12px;
-  transition: width 1s, box-shadow 1s;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+
+  color: white;
 }

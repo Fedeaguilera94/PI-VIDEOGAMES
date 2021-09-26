@@ -25,25 +25,27 @@ export default function SearchBar() {
   }
 
   return (
-    <div>
+    <>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
-        <input
-          className={styles.container}
-          type="text"
-          value={name}
-          placeholder="Search Videogame..."
-          onChange={(e) => {
-            handleInputChange(e);
-          }}
-        />
-        <button className={styles.btn} type="submit">
-          Search
-        </button>
+        <div className={styles.conteiner}>
+          <input
+            className={styles.searchbar}
+            type="text"
+            value={name}
+            placeholder="Search Videogame..."
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+          <button className={styles.bn30} type="submit">
+            Search
+          </button>
+        </div>
       </form>
-    </div>
+    </>
   );
 }

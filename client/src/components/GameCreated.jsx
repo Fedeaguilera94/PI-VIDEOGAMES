@@ -30,7 +30,7 @@ export default function GameCreated() {
     description: "",
     releaseDate: "",
     rating: "",
-    platforms: [], // era string[{name:ps5},{name:}]
+    platforms: [],
     genres: [],
   });
 

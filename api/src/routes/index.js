@@ -13,7 +13,7 @@ const router = Router();
 //______________________________________________________________________________
 const getGames = async () => {
   let apiGame = [];
-
+  // &page_size=50&page= PROBAR!!!!!!!
   const url1 = await axios.get(
     `https://api.rawg.io/api/games?key=${API_KEY}&page=1`
   );

@@ -5,7 +5,7 @@ export function getVideoGames() {
     var json = await axios.get("http://localhost:3001/videogames"); //conecto fyb
     return dispatch({
       type: "GET_VIDEOGAMES",
-      payload: json.data, // default asc
+      payload: json.data,
     });
   };
 }

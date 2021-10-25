@@ -7,18 +7,23 @@
 }
 
 .btnhome {
-  display: flex;
+  margin-top: 0.5rem;
   margin-left: 1rem;
-  justify-content: space-between;
 }
+
 .link {
   font-size: 1rem;
   font-family: "Rubik";
 }
+.linelink {
+  margin-left: 0.5rem;
+  width: 15rem;
+  height: 1rem;
+}
 
 .btnreload {
   display: flex;
-  margin: 1rem 1rem;
+  margin-bottom: 1rem;
   justify-content: center;
 }
 

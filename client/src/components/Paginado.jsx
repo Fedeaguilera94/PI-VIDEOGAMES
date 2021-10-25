@@ -10,15 +10,13 @@ export default function Paginado({ gamesTotal, allVideoGames, paginado }) {
   }
 
   return (
-    <ul className={style.pos}>
+    <div className={style.pos}>
       {pageNum &&
         pageNum.map((number) => (
-          <li className={style.list} key={number}>
-            <a className={style.paginado} onClick={() => paginado(number)}>
-              {number}
-            </a>
-          </li>
+          <a key={number} onClick={() => paginado(number)}>
+            {number}
+          </a>
         ))}
-    </ul>
+    </div>
   );
 }

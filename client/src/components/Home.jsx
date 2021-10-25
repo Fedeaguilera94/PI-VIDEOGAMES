@@ -17,6 +17,7 @@ import styles from "./Home.module.css";
 import NavBar from "./NavBar";
 import Spinner from "./Spinner";
 import { Link } from "react-router-dom";
+import { BiJoystickButton } from "react-icons/bi";
 export default function Home() {
   const dispatch = useDispatch(); //hook
   const allVideoGames = useSelector((state) => state.videoGames); //mapstatetoprops =
@@ -88,8 +89,15 @@ export default function Home() {
     <div>
       <div className={styles.btnhome}>
         <Link className={styles.link} to="/creategame">
-          Create videogame
+          <BiJoystickButton /> Create videogame
         </Link>
+      </div>
+      <div className={styles.line}>
+        <img
+          className={styles.linelink}
+          alt="Line"
+          src="https://hbomax-images.warnermediacdn.com/2021-09/hero_promo_purpline.png?host=wme-hbomax-drupal-prod.s3.amazonaws.com"
+        />
       </div>
       <div className={styles.btnreload}>
         <button
@@ -127,11 +135,13 @@ export default function Home() {
           );
         })}
       </ul>
-      <Paginado
-        gamesTotal={gamesPerPage}
-        allVideoGames={allVideoGames.length}
-        paginado={paginado}
-      />
+      <div style={{ marginBottom: "2rem" }}>
+        <Paginado
+          gamesTotal={gamesPerPage}
+          allVideoGames={allVideoGames.length}
+          paginado={paginado}
+        />
+      </div>
     </div>
   );
 }

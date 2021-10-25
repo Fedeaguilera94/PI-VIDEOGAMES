@@ -2,12 +2,12 @@
   list-style: none;
 }
 .gameCard:hover {
-  filter: blur(1px);
+  opacity: 0.9;
 }
 
 .gameImage {
   border-radius: 10px;
-  border: 1px solid #5b1ce6;
+
   background-color: azure;
 }
 .titleName {

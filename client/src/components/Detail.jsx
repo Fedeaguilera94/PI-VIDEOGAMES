@@ -6,7 +6,6 @@ import styles from "./Detail.module.css";
 
 export default function Detail(props) {
   const dispatch = useDispatch();
-  console.log("detail", props);
 
   const { id } = props.match.params;
 

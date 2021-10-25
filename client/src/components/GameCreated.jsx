@@ -184,12 +184,14 @@ export default function GameCreated() {
 
         <select onChange={(e) => handleSelect(e)}>
           {generos.map((g) => (
-            <option value={g.name}>{g.name}</option>
+            <option key={g.name} value={g.name}>
+              {g.name}
+            </option>
           ))}
         </select>
 
         {input.genres.map((g) => (
-          <div className="divGenre">
+          <div key={g.name} className="divGenre">
             <p>{g}</p>
             <button
               className={styles.botonDelete}

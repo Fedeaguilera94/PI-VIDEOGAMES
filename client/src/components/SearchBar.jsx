@@ -6,12 +6,11 @@ import styles from "./SearchBar.module.css";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
-  const [name, setName] = useState(""); // FORM CONTROLADO
+  const [name, setName] = useState(""); // ESTADO LOCAL
 
   function handleInputChange(e) {
     e.preventDefault();
     setName(e.target.value);
-    //console.log(name);
   }
 
   function handleSubmit(e) {
@@ -19,7 +18,7 @@ export default function SearchBar() {
     if (!name.length) {
       alert("Please Writing a VideoGame");
     } else {
-      dispatch(getNameVideoGame(name));
+      dispatch(getNameVideoGame(name)); // VA AL ESTADO GLOBAL
       setName("");
     }
   }
@@ -36,7 +35,7 @@ export default function SearchBar() {
             className={styles.searchbar}
             type="text"
             value={name}
-            placeholder="Search Videogame..."
+            placeholder="     Search Videogame..."
             onChange={(e) => {
               handleInputChange(e);
             }}

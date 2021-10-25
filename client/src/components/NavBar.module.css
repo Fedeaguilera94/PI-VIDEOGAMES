@@ -4,22 +4,26 @@
 }
 
 .selectCont {
-  border-radius: 10px;
   cursor: pointer;
   text-align: center;
   outline: none;
   margin-top: 1rem;
   margin-left: 2rem;
-  height: 2rem;
+  height: 1.5rem;
   width: 7rem;
-  letter-spacing: 0.1em;
   font-size: 19px;
-  border-style: groove;
   border-color: blueviolet;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   background-color: black;
   font-family: "Rubik";
   color: white;
   -webkit-appearance: none;
+}
+
+.selectCont:hover {
+  opacity: 0.8;
 }
 
 option {

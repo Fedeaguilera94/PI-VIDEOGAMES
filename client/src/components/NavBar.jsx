@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./NavBar.module.css";
-import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 export default function NavBar({
@@ -32,8 +31,9 @@ export default function NavBar({
               value="DEFAULT"
               name="DEFAULT"
             >
-              Order
+              Order ⇵
             </option>
+
             <option value="asc">A-Z</option>
             <option value="desc">Z-A</option>
           </select>
@@ -43,7 +43,7 @@ export default function NavBar({
             onChange={(e) => handleScore(e)}
           >
             <option selected="false" disabled="disabled" value="DEFAULT">
-              Rating
+              Rating ⇵
             </option>
             <option value="top">Rating Top</option>
             <option value="low">Rating Low</option>
@@ -55,7 +55,7 @@ export default function NavBar({
             onChange={(e) => handleFilterCreated(e)}
           >
             <option selected="false" disabled="disabled" value="DEFAULT">
-              Games
+              Games ⇵
             </option>
             <option value="all">All</option>
             <option value="created">Created</option>
@@ -69,7 +69,7 @@ export default function NavBar({
             onChange={(e) => handleFilterGenre(e)}
           >
             <option selected="false" disabled="disabled" value="DEFAULT">
-              Genres
+              Genres ⇵
             </option>
             <option value="all">All</option>
 

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -L",
+    "forever":"forever index.js"
     "dev": "nodemon index.js",
     "test": "mocha -w ./tests/**/*.spec.js"
   },

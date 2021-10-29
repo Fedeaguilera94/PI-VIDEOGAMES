@@ -8,13 +8,17 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case "RESET":
+      return {
+        ...state,
+        detail: [],
+      };
     case "GET_VIDEOGAMES":
       return {
         ...state,
         videoGames: action.payload,
         allVideoGames: action.payload,
       };
-    //_____________________________________________
     case "GET_NAME_VIDEOGAME":
       return {
         ...state,
@@ -35,7 +39,7 @@ function rootReducer(state = initialState, action) {
               if (b.name > a.name) {
                 return -1;
               }
-              return 0; // si son iguales lo deja igual
+              return 0;
             })
           : state.videoGames.sort(function (a, b) {
               if (a.name > b.name) {
@@ -50,7 +54,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoGames: sortArray,
       };
-    //_________________________________________
     case "ORDER_BY_RATING":
       let sort =
         action.payload === "low"
@@ -61,7 +64,7 @@ function rootReducer(state = initialState, action) {
               if (b.rating > a.rating) {
                 return -1;
               }
-              return 0; // si son iguales lo deja igual
+              return 0;
             })
           : state.videoGames.sort(function (a, b) {
               if (a.rating > b.rating) {
@@ -77,7 +80,6 @@ function rootReducer(state = initialState, action) {
         videoGames: sort,
       };
 
-    //___________________________________________
     case "FILTER_BY_GENRE":
       const todos = state.videoGames;
       const filtrado =
@@ -110,19 +112,17 @@ function rootReducer(state = initialState, action) {
         videoGames:
           action.payload === "all" ? state.allVideoGames : createdFilter,
       };
-    case "POST_VIDEOGAME": // no hace nada
+    case "POST_VIDEOGAME":
       return {
         ...state,
       };
     case "GET_DETAIL":
-      //console.log("info DETAIL", action.payload);
       return {
         ...state,
         detail: action.payload,
       };
 
     default:
-      //console.log("DEFAULT CASE", action.type);
       return state;
   }
 }

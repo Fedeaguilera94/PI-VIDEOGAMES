@@ -13,67 +13,79 @@ export default function Detail(props) {
   useEffect(() => {
     dispatch(getDetail(id));
   }, [id, dispatch]);
-  const detail = useSelector((state) => state.detail);
+  var detail = useSelector((state) => state.detail);
 
   const imgUrl =
     "https://thumbs.dreamstime.com/b/se%C3%B1al-de-ne%C3%B3n-la-m%C3%A1quina-juego-arcada-122983326.jpg";
 
+  function handleReset() {
+    dispatch(getDetail());
+  }
+
   return (
-    <>
-      <div className={styles.btnC}>
-        <Link className={styles.btn} to="/home">
-          <RiArrowGoBackFill /> Home
-        </Link>
-      </div>
-      <div className={styles.line}>
-        <img
-          className={styles.linelink}
-          alt="Line"
-          src="https://hbomax-images.warnermediacdn.com/2021-09/hero_promo_purpline.png?host=wme-hbomax-drupal-prod.s3.amazonaws.com"
-        />
-      </div>
-      <div className={styles.detailContainer}>
-        <div className={styles.detailContainer}>
-          <img
-            className={`${styles.col} ${styles.imgDetail}`}
-            src={detail.background_image || imgUrl}
-            alt={detail.name}
-          />
-          <div className={`${styles.col} ${styles.gameDetails}`}>
-            <p className={styles.firstItem}>
-              <strong>Title: </strong> {detail.name}
-            </p>
-
-            <p>
-              <strong>Released date:</strong>{" "}
-              {detail.released || detail.releaseDate}
-            </p>
-
-            <p>
-              <strong>Platforms: </strong>
-
-              {detail.id?.length > 7
-                ? detail.platforms?.map((p) => p.name).join(" - ")
-                : detail.platforms?.map((p) => p.platform.name).join(" - ")}
-            </p>
-
-            <p>
-              <strong>Genres: </strong>
-              {detail.genres?.map((g) => g.name).join("-")}
-            </p>
-
-            <p>
-              <strong>Rating: </strong>
-              {detail.rating}
-            </p>
-
-            <p>
-              <strong>Description: </strong>
-              {detail.description_raw || detail.description}
-            </p>
-          </div>
+    <div>
+      {detail.length == 0 ? (
+        <div className={styles.load}>
+          <p>...Loading</p>
         </div>
-      </div>
-    </>
+      ) : (
+        <>
+          <div className={styles.btnC}>
+            <Link className={styles.btn} to="/home" onClick={handleReset}>
+              <RiArrowGoBackFill /> Home
+            </Link>
+          </div>
+          <div className={styles.line}>
+            <img
+              className={styles.linelink}
+              alt="Line"
+              src="https://hbomax-images.warnermediacdn.com/2021-09/hero_promo_purpline.png?host=wme-hbomax-drupal-prod.s3.amazonaws.com"
+            />
+          </div>
+          <div className={styles.detailContainer}>
+            <div className={styles.detailContainer}>
+              <img
+                className={`${styles.col} ${styles.imgDetail}`}
+                src={detail.background_image || imgUrl}
+                alt={detail.name}
+              />
+              <div className={`${styles.col} ${styles.gameDetails}`}>
+                <p className={styles.firstItem}>
+                  <strong>Title: </strong> {detail.name}
+                </p>
+
+                <p>
+                  <strong>Released date:</strong>{" "}
+                  {detail.released || detail.releaseDate}
+                </p>
+
+                <p>
+                  <strong>Platforms: </strong>
+
+                  {detail.id?.length > 7
+                    ? detail.platforms?.map((p) => p.name).join(" - ")
+                    : detail.platforms?.map((p) => p.platform.name).join(" - ")}
+                </p>
+
+                <p>
+                  <strong>Genres: </strong>
+                  {detail.genres?.map((g) => g.name).join("-")}
+                </p>
+
+                <p>
+                  <strong>Rating: </strong>
+                  {detail.rating}
+                </p>
+
+                <p>
+                  <strong>Description: </strong>
+                  {detail.description_raw || detail.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 }

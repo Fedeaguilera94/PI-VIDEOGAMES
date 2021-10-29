@@ -1,20 +1,51 @@
-.CreateVideogame {
-  position: relative;
-  top: 10%;
-  margin: 100px auto;
+.mainscreen {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  padding-top: 0vh;
-
-  width: 40vh;
-  background-color: rgba(12, 12, 11, 0.8);
-
-  border-radius: 50px;
-  color: #e3eef5;
-  box-shadow: rgb(77, 133, 236) 0 -1px 7px 1px,
-    inset rgb(233, 66, 122) 0 -1px 15px, rgb(226, 120, 33) 0 2px 12px;
+  background-color: #dfdbe5;
+  background-image: url("https://wallpaperaccess.com/full/3063067.png");
+  color: #963e7b;
 }
+
+.CreateVideogame {
+  width: 60rem;
+  margin: auto;
+  background: white;
+  position: center;
+  align-self: center;
+  top: 50rem;
+  border-radius: 1.5rem;
+  box-shadow: 4px 3px 20px #3535358c;
+  display: flex;
+  flex-direction: row;
+}
+
+.rightside {
+  background-color: #ffffff;
+  width: 35rem;
+  border-bottom-right-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  padding: 1rem 2rem 3rem 3rem;
+}
+
+.leftside {
+  background: #030303;
+  width: 25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+}
+
+.product {
+  object-fit: cover;
+  width: 20em;
+  height: 20em;
+  border-radius: 100%;
+}
+
 .Title {
   display: flex;
   justify-content: center;
@@ -31,16 +62,43 @@
   font-size: 15px;
 }
 
-.btnHome {
-  background-color: transparent;
+.btn {
+  background: linear-gradient(135deg, #753370 0%, #298096 100%);
+  padding: 15px;
+  border: none;
+  border-radius: 50px;
   color: white;
-  border-radius: 5px;
-
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  width: 100%;
+  letter-spacing: 0.11rem;
+  outline: none;
   cursor: pointer;
-  border: 1px solid #e78122;
-  box-shadow: rgb(77, 133, 236) 0 -1px 70px 1px,
-    inset rgb(233, 66, 122) 0 -1px 1px, rgb(226, 120, 33) 0 2px 12px;
-  transition: width 1s, box-shadow 1s;
+}
+
+.dateC {
+  display: flex;
+  align-items: center;
+}
+.expcvv {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.6rem;
+}
+.expcvv_text {
+  display: flex;
+  align-items: center;
+}
+.expcvv_text2 {
+  padding: 0 1rem;
+}
+
+.date {
+  height: 2rem;
+}
+.rating {
+  height: 1rem;
 }
 .divHome {
   display: flex;
@@ -59,12 +117,57 @@
   transition: width 1s, box-shadow 1s;
 }
 .inputC {
-  margin: 10px 0 10px 0;
-  padding: 15px;
-  font-size: 15px;
-
-  justify-content: center;
+  color: #030303;
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1.5px solid #ccc;
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
+  font-family: "Roboto", sans-serif;
+  color: #615a5a;
+  font-size: 1.1rem;
+  font-weight: 500;
+  outline: none;
 }
 div {
   justify-content: center;
+}
+
+.genreC {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.genre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select {
+  height: 1.3rem;
+  background-color: black;
+  text-align: center;
+  color: white;
+}
+
+.btnH {
+  margin: 2rem 0 0 2rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.btn1 {
+  color: white;
+  font-size: 1.3rem;
+  font-family: "Rubik";
+
+  text-decoration: none;
+}
+.linelink {
+  margin-left: 0.5rem;
+  width: 15rem;
+  height: 1rem;
 }

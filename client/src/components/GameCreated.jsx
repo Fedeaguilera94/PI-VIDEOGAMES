@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { getGenres, postVideoGame } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./GameCreated.module.css";
+import { FaTrash } from "react-icons/fa";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 function validate(input) {
   let error = {};
@@ -63,7 +65,7 @@ export default function GameCreated() {
   }
 
   function handleSubmit(e) {
-    e.preventDefault(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    e.preventDefault();
     setErrors(
       validate({
         ...input,
@@ -78,7 +80,7 @@ export default function GameCreated() {
         description: "",
         releaseDate: "",
         rating: "",
-        platforms: [], // era string
+        platforms: [],
         genres: [],
       });
     } else {
@@ -106,112 +108,152 @@ export default function GameCreated() {
   }, [dispatch]);
 
   return (
-    <div className={styles.CreateVideogame}>
+    <>
+      <div className={styles.btnH}>
+        <Link className={styles.btn1} to="/home">
+          <RiArrowGoBackFill /> Home
+        </Link>
+      </div>
+      <div className={styles.line}>
+        <img
+          className={styles.linelink}
+          alt="Line"
+          src="https://hbomax-images.warnermediacdn.com/2021-09/hero_promo_purpline.png?host=wme-hbomax-drupal-prod.s3.amazonaws.com"
+        />
+      </div>
       <h1 className={styles.Title}>Create Your VideoGame</h1>
-      <form className={styles.CreationForm} onSubmit={(e) => handleSubmit(e)}>
-        <div>
-          <input
-            className={styles.inputC}
-            placeholder="Name videogame"
-            required
-            type="text"
-            value={input.name}
-            name="name"
-            onChange={(e) => handleChange(e)}
-          />
-          {errors.name && <p className={styles.errors}>{errors.name}</p>}
-        </div>
-        <div>
-          <input
-            className={styles.inputC}
-            placeholder="Description videogame"
-            type="text"
-            required
-            value={input.description}
-            name="description"
-            onChange={(e) => handleChange(e)}
-          />
-          {errors.description && (
-            <p className={styles.errors}>{errors.description}</p>
-          )}
-        </div>
-
-        {/*                    PRUEBA                                    */}
-
-        <p>Platforms</p>
-        <select onChange={(e) => handleSelectPlatform(e)}>
-          {plataformas.map((g) => (
-            <option value={g.name}>{g.name}</option>
-          ))}
-        </select>
-
-        {input.platforms.map((g) => (
-          <div className="divGenre">
-            <p>{g}</p>
-            <button
-              className={styles.botonDelete}
-              onClick={() => handleDeletePlat(g)}
-            >
-              X
-            </button>
+      <div className={styles.mainscreen}>
+        <div className={styles.CreateVideogame}>
+          <div className={styles.leftside}>
+            <img
+              src="https://thumbs.dreamstime.com/b/se%C3%B1al-de-ne%C3%B3n-la-m%C3%A1quina-juego-arcada-122983326.jpg"
+              className={styles.product}
+              alt="Shoes"
+            />
           </div>
-        ))}
-        {errors.platforms && (
-          <p className={styles.errors}>{errors.platforms}</p>
-        )}
-
-        <div>
-          <p>Release date</p>
-          <input
-            type="date"
-            value={input.releaseDate}
-            name="releaseDate"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <p>Rating:</p>
-          <input
-            type="number"
-            value={input.rating}
-            min="0"
-            max="5"
-            name="rating"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <p>Genres</p>
-
-        <select onChange={(e) => handleSelect(e)}>
-          {generos.map((g) => (
-            <option key={g.name} value={g.name}>
-              {g.name}
-            </option>
-          ))}
-        </select>
-
-        {input.genres.map((g) => (
-          <div key={g.name} className="divGenre">
-            <p>{g}</p>
-            <button
-              className={styles.botonDelete}
-              onClick={() => handleDelete(g)}
+          <div className={styles.rightside}>
+            <form
+              className={styles.CreationForm}
+              onSubmit={(e) => handleSubmit(e)}
             >
-              X
-            </button>
-          </div>
-        ))}
-        <div className={styles.divHome}>
-          <button type="submit" className={styles.btnHome}>
-            Create VideoGame
-          </button>
-        </div>
-        <div className={styles.divHome}>
+              <div>
+                <input
+                  className={styles.inputC}
+                  placeholder="Name videogame"
+                  required
+                  type="text"
+                  value={input.name}
+                  name="name"
+                  onChange={(e) => handleChange(e)}
+                />
+                {errors.name && <p className={styles.errors}>{errors.name}</p>}
+              </div>
+              <div>
+                <input
+                  className={styles.inputC}
+                  placeholder="Description videogame"
+                  type="text"
+                  required
+                  value={input.description}
+                  name="description"
+                  onChange={(e) => handleChange(e)}
+                />
+                {errors.description && (
+                  <p className={styles.errors}>{errors.description}</p>
+                )}
+              </div>
+
+              <p>Platforms</p>
+              <select
+                className={styles.select}
+                onChange={(e) => handleSelectPlatform(e)}
+              >
+                {plataformas.map((g) => (
+                  <option value={g.name}>{g.name}</option>
+                ))}
+              </select>
+
+              <div className={styles.genreC}>
+                {input.platforms.map((g) => (
+                  <div className={styles.genre}>
+                    <p>{g}</p>
+                    {/*        <button
+                      className={styles.botonDelete}
+                      onClick={() => handleDeletePlat(g)}
+                    >
+                      X
+                    </button> */}
+                    <FaTrash onClick={() => handleDeletePlat(g)} />
+                  </div>
+                ))}
+              </div>
+              {errors.platforms && (
+                <p className={styles.errors}>{errors.platforms}</p>
+              )}
+
+              <div className={styles.expcvv}>
+                <p className={styles.expcvv_text}>Release date</p>
+
+                <div className={styles.dateC}>
+                  <input
+                    type="date"
+                    value={input.releaseDate}
+                    className={styles.inputC}
+                    name="releaseDate"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+
+                <p className={styles.expcvv_text2}>Rating:</p>
+                <div className={styles.dateC}>
+                  <input
+                    className={styles.rating}
+                    type="number"
+                    value={input.rating}
+                    min="0"
+                    max="5"
+                    name="rating"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+              </div>
+              <p>Genres</p>
+
+              <select
+                className={styles.select}
+                onChange={(e) => handleSelect(e)}
+              >
+                {generos.map((g) => (
+                  <option key={g.name} value={g.name}>
+                    {g.name}
+                  </option>
+                ))}
+              </select>
+
+              <div className={styles.genreC}>
+                {input.genres.map((g) => (
+                  <div key={g.name} className={styles.genre}>
+                    <p>{g}</p>
+
+                    <FaTrash onClick={() => handleDelete(g)} />
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.divHome}>
+                <button type="submit" className={styles.btn}>
+                  Create VideoGame
+                </button>
+              </div>
+              {/*      <div className={styles.divHome}>
           <Link to="/home">
             <button className={styles.btnHome}>Home</button>
           </Link>
+        </div> */}
+            </form>
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </>
   );
 }

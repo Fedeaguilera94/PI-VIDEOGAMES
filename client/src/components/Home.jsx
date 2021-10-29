@@ -12,28 +12,23 @@ import {
 } from "../actions";
 import GameCard from "./GameCard";
 import Paginado from "./Paginado";
-//import SearchBar from "./SearchBar";
 import styles from "./Home.module.css";
 import NavBar from "./NavBar";
 import Spinner from "./Spinner";
 import { Link } from "react-router-dom";
 import { BiJoystickButton } from "react-icons/bi";
 export default function Home() {
-  const dispatch = useDispatch(); //hook
-  const allVideoGames = useSelector((state) => state.videoGames); //mapstatetoprops =
+  const dispatch = useDispatch();
+  const allVideoGames = useSelector((state) => state.videoGames);
   const videogameState = useSelector((state) => state.allVideoGames);
 
-  //_____________estados locales
-  const [currentPages, setCurrentPages] = useState(1); //pagina actual 1
-  const [gamesPerPage, _setgamesPerPage] = useState(15); // total por pagina siempre 15
+  const [currentPages, setCurrentPages] = useState(1);
+  const [gamesPerPage, _setgamesPerPage] = useState(15);
   const [_orden, setOrden] = useState("");
 
-  //_________________________________
-  const indexLastGame = currentPages * gamesPerPage; // pagina * personajeporPagina // 15
-  const indexFirstGame = indexLastGame - gamesPerPage; //0 indice primer personaje
-  const currentGames = allVideoGames.slice(indexFirstGame, indexLastGame); // cual rendenriza depende de la pag!
-
-  // new set no permite copias
+  const indexLastGame = currentPages * gamesPerPage;
+  const indexFirstGame = indexLastGame - gamesPerPage;
+  const currentGames = allVideoGames.slice(indexFirstGame, indexLastGame);
 
   const paginado = (pageNum) => {
     setCurrentPages(pageNum);
@@ -42,18 +37,18 @@ export default function Home() {
   useEffect(() => {
     dispatch(getGenres());
     dispatch(getPlatforms());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(getVideoGames());
-  }, [dispatch]); //PONER EL ARREGLO!!!!
+  }, []);
 
   if (!allVideoGames.length && !videogameState.length) {
     return <Spinner />;
   }
 
   function handleClick(e) {
-    e.preventDefault(); //!!!! PONER
+    e.preventDefault();
     dispatch(getVideoGames());
   }
 
@@ -61,14 +56,14 @@ export default function Home() {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
     setCurrentPages(1);
-    setOrden(e.target.value); //!!!!!!!!!!!!!!! usar otro estado
+    setOrden(e.target.value);
   }
 
   function handleScore(e) {
     e.preventDefault();
     dispatch(orderByRating(e.target.value));
     setCurrentPages(1);
-    setOrden(e.target.value); //!!!!!!!!!!!!!!! usar otro estado
+    setOrden(e.target.value);
   }
 
   function handleFilterCreated(e) {

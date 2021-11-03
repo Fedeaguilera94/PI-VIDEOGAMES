@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -L",
-    "forever":"forever index.js",
+    "forever": "forever index.js",
     "dev": "nodemon index.js",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
@@ -25,16 +25,15 @@
     "ioredis": "^4.19.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.14",
     "pg": "^8.5.1",
     "postgres": "^1.0.2",
     "sequelize": "^6.3.5",
-    "nodemon": "^2.0.14",
     "supertest-as-promised": "^4.0.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
-    "nodemon": "^2.0.14",
     "supertest": "^6.0.1",
     "supertest-session": "^4.1.0"
   }

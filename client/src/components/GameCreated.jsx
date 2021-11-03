@@ -128,7 +128,7 @@ export default function GameCreated() {
             <img
               src="https://thumbs.dreamstime.com/b/se%C3%B1al-de-ne%C3%B3n-la-m%C3%A1quina-juego-arcada-122983326.jpg"
               className={styles.product}
-              alt="Shoes"
+              alt="Game"
             />
           </div>
           <div className={styles.rightside}>
@@ -177,12 +177,7 @@ export default function GameCreated() {
                 {input.platforms.map((g) => (
                   <div className={styles.genre}>
                     <p>{g}</p>
-                    {/*        <button
-                      className={styles.botonDelete}
-                      onClick={() => handleDeletePlat(g)}
-                    >
-                      X
-                    </button> */}
+
                     <FaTrash onClick={() => handleDeletePlat(g)} />
                   </div>
                 ))}
@@ -245,11 +240,6 @@ export default function GameCreated() {
                   Create VideoGame
                 </button>
               </div>
-              {/*      <div className={styles.divHome}>
-          <Link to="/home">
-            <button className={styles.btnHome}>Home</button>
-          </Link>
-        </div> */}
             </form>
           </div>
         </div>

@@ -3,15 +3,26 @@ require("dotenv").config();
 const { API_KEY } = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
+const { getAllGenres } = require("../../controllers/genre");
 const axios = require("axios");
 const { Genre, Videogame, Platform } = require("../db");
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+const platforms = require("./platforms");
+const videogame = require("./videogame");
+const videogames = require("./videogames");
+const videogameId = require("./videogameId");
+const genre = require("./genre");
 
+router.use("/platforms", platforms);
+router.use("/videogame", videogame);
+router.use("/videogames", videogames);
+router.use("/videogame/:id", videogameId);
+router.use("/genre", genre);
 //______________________________________________________________________________
-const getGames = async () => {
+/* const getGames = async () => {
   let apiGame = [];
   // &page_size=50&page= PROBAR!!!!!!!
   const url1 = await axios.get(
@@ -170,5 +181,5 @@ router.get("/videogames/:id", async (req, res) => {
     res.status(404).json({ error: "Id not found" });
   }
 });
-//____________________________________________________
+//____________________________________________________ */
 module.exports = router;

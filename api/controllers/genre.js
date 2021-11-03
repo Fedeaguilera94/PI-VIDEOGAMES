@@ -1,5 +1,6 @@
-const { getApiDogs } = require("./dogs");
-const { Genre } = require("../db");
+const axios = require("axios");
+const { Genre } = require("../src/db");
+const { API_KEY } = process.env;
 
 const getAllGenres = async (req, res) => {
   try {

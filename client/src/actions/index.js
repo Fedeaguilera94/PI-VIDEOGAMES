@@ -27,7 +27,7 @@ export function getNameVideoGame(name) {
 
 export function getGenres() {
   return async function (dispatch) {
-    var info = await axios.get("/genres", {});
+    var info = await axios.get("/genre", {});
     return dispatch({ type: "GET_GENRES", payload: info.data });
   };
 }
@@ -72,7 +72,7 @@ export function getDetail(id) {
   if (id) {
     return async function (dispatch) {
       try {
-        let json = await axios.get("/videogames/" + id);
+        let json = await axios.get("/videogame/" + id);
 
         return dispatch({
           type: "GET_DETAIL",

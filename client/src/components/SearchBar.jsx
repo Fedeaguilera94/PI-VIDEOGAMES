@@ -6,8 +6,7 @@ import styles from "./SearchBar.module.css";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
-  const [name, setName] = useState(""); // ESTADO LOCAL
-
+  const [name, setName] = useState("");
   function handleInputChange(e) {
     e.preventDefault();
     setName(e.target.value);
@@ -18,7 +17,7 @@ export default function SearchBar() {
     if (!name.length) {
       alert("Please Writing a VideoGame");
     } else {
-      dispatch(getNameVideoGame(name)); // VA AL ESTADO GLOBAL
+      dispatch(getNameVideoGame(name));
       setName("");
     }
   }
